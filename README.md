@@ -4,24 +4,32 @@ Lunar landing artificial intelligence.
 
 ## Installation
 
-- Clone the repository:
+1. Clone the repository:
 
-```console
-$ git clone https://github.com/leonardoflorido/lunar-landing.git
+```sh
+git clone https://github.com/leonardoflorido/lunar-landing.git
 ```
 
-- Create a virtual environment:
+2. Create a virtual environment and activate it:
 
-```console
-$ python3 -m venv venv
-$ source venv/bin/activate
+```sh
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-- Install the requirements:
+3. Install the requirements:
 
-```console
-$ apt-get install -y swig
-$ pip3 install -r requirements.txt
+```sh
+apt-get install -y swig
+pip3 install -r requirements.txt
+```
+
+## Usage
+
+- Run the following command to train the agent and see the results:
+
+```sh
+python3 main.py
 ```
 
 ## Resources
