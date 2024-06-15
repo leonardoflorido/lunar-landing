@@ -45,3 +45,5 @@ def train_dqn():
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(episode - 100, np.mean(scores_on_100_episodes)))
             torch.save(agent.local_qnetwork.state_dict(), 'checkpoint.pth')
             break
+    
+    return agent
