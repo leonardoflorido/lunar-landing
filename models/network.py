@@ -15,4 +15,5 @@ class Network(nn.Module):
         x = F.relu(x)
         x = self.fc2(x)
         x = F.relu(x)
+        
         return self.fc3(x)

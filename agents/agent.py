@@ -15,6 +15,7 @@ class ReplayMemory:
 
     def push(self, event):
         self.memory.append(event)
+
         if len(self.memory) > self.capacity:
             del self.memory[0]
 
@@ -25,6 +26,7 @@ class ReplayMemory:
         rewards = torch.from_numpy(np.vstack([e[2] for e in experiences if e is not None])).float().to(self.device)
         next_states = torch.from_numpy(np.vstack([e[3] for e in experiences if e is not None])).float().to(self.device)
         dones = torch.from_numpy(np.vstack([e[4] for e in experiences if e is not None]).astype(np.uint8)).float().to(self.device)
+
         return states, next_states, actions, rewards, dones
 
 class Agent:
@@ -44,6 +46,7 @@ class Agent:
     def step(self, state, action, reward, next_state, done):
         self.memory.push((state, action, reward, next_state, done))
         self.t_step = (self.t_step + 1) % 4
+
         if self.t_step == 0:
             if len(self.memory.memory) > self.minibatch_size:
                 experiences = self.memory.sample(self.minibatch_size)
@@ -52,9 +55,12 @@ class Agent:
     def act(self, state, epsilon=0.):
         state = torch.from_numpy(state).float().unsqueeze(0).to(self.device)
         self.local_qnetwork.eval()
+
         with torch.no_grad():
             action_values = self.local_qnetwork(state)
+
         self.local_qnetwork.train()
+        
         if random.random() > epsilon:
             return np.argmax(action_values.cpu().data.numpy())
         else:
