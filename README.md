@@ -20,7 +20,8 @@ source venv/bin/activate
 3. Install the requirements:
 
 ```sh
-apt-get install -y swig
+brew install swig
+brew install ffmeg
 pip3 install -r requirements.txt
 ```
 
